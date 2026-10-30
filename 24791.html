@@ -8,6 +8,8 @@
 <meta name='twitter:card' content='summary_large_image'>
 <link rel='preconnect' href='https://fonts.googleapis.com'><link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Bangers&family=Caveat:wght@600;700&family=Comic+Neue:wght@700&family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700&family=Press+Start+2P&family=Tilt+Neon&family=VT323&display=swap'><style>
+/* --u is 1% of the panel height at 9:16, and shrinks with the width on narrower screens */
+:root{--u:min(1cqh,1.778cqw)}
 *{box-sizing:border-box;margin:0}
 html,body{height:100%;background:#05060c;overscroll-behavior:none}
 body{display:flex;align-items:center;justify-content:center;font-family:'Nunito',system-ui,sans-serif;-webkit-tap-highlight-color:transparent}
@@ -15,59 +17,61 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Nunito'
 .scene{position:absolute;inset:0;opacity:0;transition:opacity .45s ease}
 .scene.on{opacity:1}
 .scene video,.scene img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.bars{position:absolute;top:2.2cqh;left:5cqw;right:5cqw;display:flex;gap:1cqw;z-index:6}
-.bars i{flex:1;height:.32cqh;min-height:3px;border-radius:2px;background:var(--bar-bg);overflow:hidden}
+.bars{position:absolute;top:calc(2.2*var(--u));left:5cqw;right:5cqw;display:flex;gap:1cqw;z-index:6}
+.bars i{flex:1;height:calc(.32*var(--u));min-height:3px;border-radius:2px;background:var(--bar-bg);overflow:hidden}
 .bars i b{display:block;height:100%;width:0;background:var(--bar)}
 .stage{--bar:#fff;--bar-bg:rgba(255,255,255,.3);--chip:rgba(255,255,255,.14);--shareBg:rgba(255,255,255,.16)}
 .stage.light{--bar:#1B1917;--bar-bg:rgba(27,25,23,.2);--chip:rgba(27,25,23,.08);--shareBg:rgba(27,25,23,.42)}
-.card{position:absolute;inset:0;z-index:3;padding:11.5cqh max(6.5cqw,24px) 0;opacity:0;pointer-events:none;transition:opacity .35s ease}
+.card{position:absolute;inset:0;z-index:3;padding:calc(11.5*var(--u)) max(6.5cqw,24px) 0;opacity:0;pointer-events:none;transition:opacity .35s ease}
 .card.on{opacity:1}
 .card:not(.on) .actions{pointer-events:none}
-.card .copy{max-width:44cqh;transform:translateY(1.2cqh);transition:transform .6s cubic-bezier(.23,1,.32,1)}
+.card .copy{max-width:calc(44*var(--u));transform:translateY(calc(1.2*var(--u)));transition:transform .6s cubic-bezier(.23,1,.32,1)}
 .card.on .copy{transform:none}
-.label{font-size:2.15cqh;margin-bottom:1.1cqh}
-.big{font-size:7.6cqh;line-height:1.02;white-space:nowrap;margin-bottom:2.2cqh}
-.body{font-size:2.15cqh;line-height:1.38;max-width:36ch}
-.badges{display:flex;flex-direction:column;align-items:flex-start;gap:1cqh;margin-top:2.2cqh}
-.badges h4{font-size:1.6cqh;font-weight:700;opacity:.7}
-.badges span{border:2px solid currentColor;border-radius:999px;padding:.8cqh 2.2cqh;font-size:1.8cqh}
-.actions{margin-top:2.6cqh;position:relative;pointer-events:auto;display:flex;flex-wrap:wrap;gap:1cqh}
-.actions a.cta{background:#5B5BF0;color:#fff}.actions a[hidden]{display:none}
-.actions a{display:inline-block;font:700 1.9cqh 'Nunito',sans-serif;background:#1B1917;color:#FAF8F5;border-radius:999px;padding:1.4cqh 2.8cqh;text-decoration:none}
+.label{font-size:calc(2.15*var(--u));margin-bottom:calc(1.1*var(--u))}
+.big{font-size:calc(7.6*var(--u));line-height:1.02;white-space:nowrap;margin-bottom:calc(2.2*var(--u))}
+.body{font-size:calc(2.15*var(--u));line-height:1.38;max-width:36ch}
+.rec-head{font-size:calc(1.6*var(--u));font-weight:700;opacity:.7;margin-top:calc(2.2*var(--u))}
+.stack{display:inline-grid;gap:calc(1*var(--u));margin-top:calc(1.2*var(--u));max-width:100%;pointer-events:auto}
+.stack>*{display:block;text-align:center;border-radius:999px;padding:calc(1*var(--u)) calc(2.4*var(--u));font:700 calc(1.8*var(--u))/1.2 'Nunito',sans-serif;border:2px solid #1B1917;text-decoration:none;color:#1B1917}
+.stack a{background:#1B1917;color:#FAF8F5}
+.stack:not(:has(span)){margin-top:calc(2.4*var(--u))}
+.cta{position:absolute;left:max(6.5cqw,24px);bottom:calc(2.4*var(--u));font:700 calc(1.7*var(--u))/1.2 'Nunito',sans-serif;background:#5B5BF0;color:#fff;border-radius:999px;padding:calc(1.2*var(--u)) calc(2.2*var(--u));text-decoration:none;white-space:nowrap}
+.cta[hidden]{display:none}
+.card.on .cta{pointer-events:auto}
 .nav{position:absolute;inset:0;display:flex;z-index:2}.nav div{flex:1}.nav div:first-child{flex:.4}
-.shares{position:absolute;top:4cqh;right:5cqw;z-index:7;display:flex;gap:1cqh}
-.shares button,.shares a{width:4.6cqh;height:4.6cqh;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;color:#fff;background:var(--shareBg);
+.shares{position:absolute;top:calc(4*var(--u));right:5cqw;z-index:7;display:flex;gap:calc(1*var(--u))}
+.shares button,.shares a{width:calc(4.6*var(--u));height:calc(4.6*var(--u));border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;color:#fff;background:var(--shareBg);
   backdrop-filter:blur(6px);transition:transform .15s ease}
 .shares button:active,.shares a:active{transform:scale(.92)}
-.shares svg{width:2.3cqh;height:2.3cqh;fill:#fff}
-.sound{position:absolute;bottom:3cqh;right:5cqw;z-index:7;width:5.4cqh;height:5.4cqh;border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;
+.shares svg{width:calc(2.3*var(--u));height:calc(2.3*var(--u));fill:#fff}
+.sound{position:absolute;bottom:calc(3*var(--u));right:5cqw;z-index:7;width:calc(5.4*var(--u));height:calc(5.4*var(--u));border-radius:50%;border:0;display:grid;place-items:center;cursor:pointer;
   background:var(--chip);color:var(--bar);backdrop-filter:blur(6px)}
-.sound svg{width:2.7cqh;height:2.7cqh}
-.toast{position:absolute;top:9cqh;right:5cqw;z-index:8;font:700 1.5cqh 'Nunito',sans-serif;background:#1B1917;color:#FAF8F5;border-radius:999px;padding:.7cqh 1.6cqh;opacity:0;transition:opacity .25s}
+.sound svg{width:calc(2.7*var(--u));height:calc(2.7*var(--u))}
+.toast{position:absolute;top:calc(9*var(--u));right:5cqw;z-index:8;font:700 calc(1.5*var(--u)) 'Nunito',sans-serif;background:#1B1917;color:#FAF8F5;border-radius:999px;padding:calc(.7*var(--u)) calc(1.6*var(--u));opacity:0;transition:opacity .25s}
 .toast.on{opacity:1}
-.gate{position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:1.6cqh;padding-bottom:12cqh;
+.gate{position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:calc(1.6*var(--u));padding-bottom:calc(12*var(--u));
   background:linear-gradient(to top,rgba(250,248,245,.92),rgba(250,248,245,.55) 35%,rgba(250,248,245,0) 60%);color:#1B1917;cursor:pointer;transition:opacity .5s}
 .gate.gone{opacity:0;pointer-events:none}
-.gate .play{font:800 2.6cqh 'Fraunces',serif;background:#5B5BF0;color:#fff;border-radius:999px;padding:1.6cqh 4.4cqh;box-shadow:0 1cqh 3cqh rgba(91,91,240,.35)}
-.gate small{font-size:1.5cqh;opacity:.75}
+.gate .play{font:800 calc(2.6*var(--u)) 'Fraunces',serif;background:#5B5BF0;color:#fff;border-radius:999px;padding:calc(1.6*var(--u)) calc(4.4*var(--u));box-shadow:0 calc(1*var(--u)) calc(3*var(--u)) rgba(91,91,240,.35)}
+.gate small{font-size:calc(1.5*var(--u));opacity:.75}
 
 /* ---- per-scene typography: each panel speaks in its own medium ---- */
 .t-summit{color:#1B1917}.t-summit .big{font-family:'Fraunces',serif;font-weight:800;letter-spacing:-.02em}
 .t-summit .label{font-weight:700;letter-spacing:.02em}
-.t-pixel{color:#fff}.t-pixel .label{font-family:'Press Start 2P',monospace;font-size:1.55cqh;color:#7FD3AE;line-height:1.5}
-.t-pixel .big{font-family:'Press Start 2P',monospace;font-size:5.4cqh;line-height:1.15;text-shadow:.45cqh .45cqh 0 #3F3FC4}
-.t-pixel .body{font-family:'VT323',monospace;font-size:3.05cqh;line-height:1.12}
+.t-pixel{color:#fff}.t-pixel .label{font-family:'Press Start 2P',monospace;font-size:calc(1.55*var(--u));color:#7FD3AE;line-height:1.5}
+.t-pixel .big{font-family:'Press Start 2P',monospace;font-size:calc(5.4*var(--u));line-height:1.15;text-shadow:calc(.45*var(--u)) calc(.45*var(--u)) 0 #3F3FC4}
+.t-pixel .body{font-family:'VT323',monospace;font-size:calc(3.05*var(--u));line-height:1.12}
 .t-clay{color:#1B1917}.t-clay .big{font-family:'Fredoka',sans-serif;font-weight:700;letter-spacing:-.01em;color:#3E3A73}
 .t-clay .label{font-family:'Fredoka',sans-serif;font-weight:600}.t-clay .body{font-family:'Fredoka',sans-serif;font-weight:500}
 .t-neon{color:#F2F1FF}.t-neon .big,.t-neon .label{font-family:'Tilt Neon',sans-serif}
-.t-neon .big{color:#fff;text-shadow:0 0 .4cqh #fff,0 0 1.4cqh #8D8DF7,0 0 3cqh #5B5BF0}
-.t-neon .label{color:#7FD3AE;text-shadow:0 0 1cqh rgba(127,211,174,.7)}
+.t-neon .big{color:#fff;text-shadow:0 0 calc(.4*var(--u)) #fff,0 0 calc(1.4*var(--u)) #8D8DF7,0 0 calc(3*var(--u)) #5B5BF0}
+.t-neon .label{color:#7FD3AE;text-shadow:0 0 calc(1*var(--u)) rgba(127,211,174,.7)}
 .t-neon .body{font-family:'Tilt Neon',sans-serif;opacity:.92}
-.t-comic{color:#1B1917}.t-comic .big{font-family:'Bangers',cursive;font-size:8.6cqh;letter-spacing:.04em;color:#5B5BF0;-webkit-text-stroke:.18cqh #1B1917;text-shadow:.5cqh .5cqh 0 #54A781}
-.t-comic .label{font-family:'Bangers',cursive;font-size:2.6cqh;letter-spacing:.06em}.t-comic .body{font-family:'Comic Neue',sans-serif;font-weight:700}
-.t-water{color:#1B1917}.t-water .big{font-family:'Caveat',cursive;font-weight:700;font-size:9cqh;color:#2F2B57}
-.t-water .label{font-family:'Caveat',cursive;font-size:3.1cqh;font-weight:600}
-.thanks .big{font-size:7.4cqh;white-space:normal}
+.t-comic{color:#1B1917}.t-comic .big{font-family:'Bangers',cursive;font-size:calc(8.6*var(--u));letter-spacing:.04em;color:#5B5BF0;-webkit-text-stroke:calc(.18*var(--u)) #1B1917;text-shadow:calc(.5*var(--u)) calc(.5*var(--u)) 0 #54A781}
+.t-comic .label{font-family:'Bangers',cursive;font-size:calc(2.6*var(--u));letter-spacing:.06em}.t-comic .body{font-family:'Comic Neue',sans-serif;font-weight:700}
+.t-water{color:#1B1917}.t-water .big{font-family:'Caveat',cursive;font-weight:700;font-size:calc(9*var(--u));color:#2F2B57}
+.t-water .label{font-family:'Caveat',cursive;font-size:calc(3.1*var(--u));font-weight:600}
+.thanks .big{font-size:calc(7.4*var(--u));white-space:normal}
 
 @media (prefers-reduced-motion: reduce){.card .copy{transform:none;transition:none}.scene{transition:none}}
 </style>
@@ -77,7 +81,7 @@ body{display:flex;align-items:center;justify-content:center;font-family:'Nunito'
 <a data-share='linkedin' href='#' target='_blank' rel='noopener' aria-label='Share on LinkedIn'><svg viewBox='0 0 24 24'><path d='M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9.75h4V21H3zM9.5 9.75h3.8v1.6h.06c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.77 2.6 4.77 6V21h-4v-5c0-1.2-.02-2.73-1.67-2.73-1.67 0-1.93 1.3-1.93 2.65V21h-4z'/></svg></a>
 <button type='button' data-share='copy' aria-label='Copy link'><svg viewBox='0 0 24 24'><path d='M10.6 13.4a1 1 0 0 1 0-1.4l3.4-3.4a1 1 0 1 1 1.4 1.4L12 13.4a1 1 0 0 1-1.4 0zM7.8 19.1a4 4 0 0 1-2.9-6.8l2.5-2.5a1 1 0 0 1 1.4 1.4l-2.5 2.5a2 2 0 0 0 2.9 2.9l2.5-2.5a1 1 0 0 1 1.4 1.4l-2.5 2.5a4 4 0 0 1-2.8 1.1zm6.9-4.4a1 1 0 0 1-.7-1.7l2.5-2.5a2 2 0 0 0-2.9-2.9l-2.5 2.5a1 1 0 0 1-1.4-1.4l2.5-2.5a4 4 0 0 1 5.7 5.7l-2.5 2.5a1 1 0 0 1-.7.3z'/></svg></button>
 </div>
-<div class='toast' id='toast'>Link copied</div><section class='card t-summit intro' data-scene='summit' aria-label='1 of 7'><div class='copy'><div class='label'>Your 2026 with SamaCare</div><div class='big'>Hannah</div><p class='body'>You're one of the top 10% of SamaCare submitters. This year you took on 60 payers, Aetna most of all. Here's the view from the top.</p></div></section><section class='card t-pixel requests' data-scene='pixel' aria-label='2 of 7'><div class='copy'><div class='label'>Requests submitted</div><div class='big' data-count='4948'>4,948</div><p class='body'>4,948 prior authorizations, one coin at a time. 4,636 of them came back approved.</p></div></section><section class='card t-clay approval' data-scene='clay' aria-label='3 of 7'><div class='copy'><div class='label'>Approval rate</div><div class='big'>98.8%</div><p class='body'>Of your requests with a payer decision, 98.8% were approved. That's higher than 81% of SamaCare submitters.</p></div></section><section class='card t-neon patients' data-scene='neon' aria-label='4 of 7'><div class='copy'><div class='label'>Patients cleared</div><div class='big' data-count='3180'>3,180</div><p class='body'>3,180 patients had an approved prior authorization from you. That's about 74 every week you were active.</p></div></section><section class='card t-comic speed' data-scene='comic' aria-label='5 of 7'><div class='copy'><div class='label'>Median time to decision</div><div class='big'>3.8 hours</div><p class='body'>Half of your requests had a payer decision in 3.8 hours or less. Faster than 70% of SamaCare submitters.</p></div></section><section class='card t-water year' data-scene='water' aria-label='6 of 7'><div class='copy'><div class='label'>Your year</div><div class='big'>10 months</div><p class='body'>You submitted in 10 different months, with a 10-month streak. February was your busiest: 631 requests.</p></div></section><section class='card t-water thanks' data-scene='water' aria-label='7 of 7'><div class='copy'><div class='label'>From everyone at SamaCare</div><div class='big'>Thank you, Hannah</div><p class='body'>Behind every prior authorization is a patient waiting to start or continue treatment. Thank you for the care you put into each one.</p><div class='badges'><h4>Your SamaCare World Records</h4><span>Most patients cleared in 2026</span><span>Most appeals won</span></div><div class='actions'><a href='24791_certificate.html'>Open your certificate</a><a id='cta' class='cta' href='#' target='_blank' rel='noopener' hidden>Talk to SamaCare about your practice</a></div></div></section><button class='sound' id='sound' type='button'></button>
+<div class='toast' id='toast'>Link copied</div><section class='card t-summit intro' data-scene='summit' aria-label='1 of 7'><div class='copy'><div class='label'>Your 2026 with SamaCare</div><div class='big'>Hannah</div><p class='body'>You're one of the top 10% of SamaCare submitters. This year you took on 60 payers, Aetna most of all. Here's the view from the top.</p></div></section><section class='card t-pixel requests' data-scene='pixel' aria-label='2 of 7'><div class='copy'><div class='label'>Requests submitted</div><div class='big' data-count='4948'>4,948</div><p class='body'>4,948 prior authorizations, one coin at a time. 4,636 of them came back approved.</p></div></section><section class='card t-clay approval' data-scene='clay' aria-label='3 of 7'><div class='copy'><div class='label'>Approval rate</div><div class='big'>98.8%</div><p class='body'>Of your requests with a payer decision, 98.8% were approved. That's higher than 81% of SamaCare submitters.</p></div></section><section class='card t-neon patients' data-scene='neon' aria-label='4 of 7'><div class='copy'><div class='label'>Patients cleared</div><div class='big' data-count='3180'>3,180</div><p class='body'>3,180 patients had an approved prior authorization from you. That's about 74 every week you were active.</p></div></section><section class='card t-comic speed' data-scene='comic' aria-label='5 of 7'><div class='copy'><div class='label'>Median time to decision</div><div class='big'>3.8 hours</div><p class='body'>Half of your requests had a payer decision in 3.8 hours or less. Faster than 70% of SamaCare submitters.</p></div></section><section class='card t-water year' data-scene='water' aria-label='6 of 7'><div class='copy'><div class='label'>Your year</div><div class='big'>10 months</div><p class='body'>You submitted in 10 different months, with a 10-month streak. February was your busiest: 631 requests.</p></div></section><section class='card t-water thanks' data-scene='water' aria-label='7 of 7'><div class='copy'><div class='label'>From everyone at SamaCare</div><div class='big'>Thank you, Hannah</div><p class='body'>Behind every prior authorization is a patient waiting to start or continue treatment. Thank you for the care you put into each one.</p><h4 class='rec-head'>Your SamaCare World Records</h4><div class='stack'><span>Most patients cleared in 2026</span><span>Most appeals won</span><a href='24791_certificate.html'>Open your certificate</a></div></div><a id='cta' class='cta' href='#' target='_blank' rel='noopener' hidden>Talk to SamaCare about your practice</a></section><button class='sound' id='sound' type='button'></button>
 <div class='nav'><div id='prev'></div><div id='next'></div></div>
 <div class='gate' role='button' tabindex='0' aria-label='Start your SamaCare Wrapped'><span class='play'>Tap to start</span><small>Best with sound on</small></div>
 </main><script>
@@ -295,7 +299,7 @@ addEventListener('touchend', e => {
   if (Math.abs(d) > 50) show(i + (d < 0 ? 1 : -1));
   sx = null;
 });
-addEventListener('resize', () => { const b = cards[i].querySelector('.big'); if (b && !b.closest('.thanks')) fit(b); });
+addEventListener('resize', () => { const b = cards[i].querySelector('.big'); if (b && !b.closest('.thanks')) fit(b); cards[i].querySelectorAll('.big,.label').forEach(alignInk); });
 document.fonts && document.fonts.ready.then(() => show(i));
 show(0);
 </script></body></html>
